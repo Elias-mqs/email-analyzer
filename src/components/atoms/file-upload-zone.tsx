@@ -5,7 +5,7 @@ import type React from 'react'
 import { useCallback, useState } from 'react'
 import { Upload, FileText, AlertCircle, FileCheck2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { processEmailBaseUrl } from '@/utils/common'
+import { useProcessDocument } from '@/hooks/use-process-document'
 
 interface FileUploadZoneProps {
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +15,8 @@ interface FileUploadZoneProps {
 }
 
 export function FileUploadZone({ onFileContent, disabled, emailText }: FileUploadZoneProps) {
+  const { processDocumentAsync } = useProcessDocument()
+
   const [isDragOver, setIsDragOver] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -39,15 +41,9 @@ export function FileUploadZone({ onFileContent, disabled, emailText }: FileUploa
         if (file.type === 'text/plain') {
           content = await file.text()
         } else if (file.type === 'application/pdf') {
-          const formData = new FormData()
-          formData.append('file', file)
+          const response = await processDocumentAsync(file)
 
-          const response = await fetch(`${processEmailBaseUrl}/api/document`, {
-            method: 'POST',
-            body: formData,
-          })
-
-          content = await response.text()
+          content = response
         }
 
         onFileContent(content)
@@ -55,7 +51,7 @@ export function FileUploadZone({ onFileContent, disabled, emailText }: FileUploa
         setError('Erro ao processar arquivo')
       }
     },
-    [onFileContent],
+    [onFileContent, processDocumentAsync],
   )
 
   const handleDrop = useCallback(
