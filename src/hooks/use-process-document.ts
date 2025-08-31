@@ -1,12 +1,13 @@
 import { useMutation } from '@tanstack/react-query'
-import { processEmailBaseUrl } from '@/utils/common'
+
+const baseUrl = window?.location?.origin
 
 async function fetchDocumentText(file: File): Promise<string> {
   try {
     const formData = new FormData()
     formData.append('file', file)
 
-    const response = await fetch(`${processEmailBaseUrl}/api/document`, {
+    const response = await fetch(`${baseUrl}/api/document`, {
       method: 'POST',
       body: formData,
     })
