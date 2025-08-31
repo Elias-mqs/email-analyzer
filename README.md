@@ -24,7 +24,7 @@ Este projeto é uma aplicação web desenvolvida em Next.js para análise autom�
 
 1. **Clone o repositório:**
    ```bash
-   git clone <url-do-repositorio>
+   git clone https://github.com/Elias-mqs/email-analyzer.git
    cd frontend
    ```
 
@@ -72,4 +72,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull r
 
 ---
 
-Desenvolvido com Next.js e Vercel.
+Desenvolvido com Next.js.
