@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Autou - Classificador de E-mails e Documentos
 
-## Getting Started
+Este projeto é uma aplicação web desenvolvida em Next.js para análise automática de e-mails e documentos (.txt e .pdf). O sistema permite que o usuário envie textos ou arquivos, que são processados por um backend inteligente para identificar palavras-chave, categoria, sentimento, sugestões de resposta e outras informações relevantes.
 
-First, run the development server:
+## Funcionalidades
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Upload de arquivos .txt e .pdf ou inserção de texto manual
+- Extração automática de texto de PDFs (processamento feito em uma rota API do próprio Next.js usando a biblioteca [pdf-parse](https://www.npmjs.com/package/pdf-parse))
+- Envio do conteúdo extraído para um backend Python para análise
+- Exibição de palavras-chave, categoria, sentimento, sugestões e estatísticas
+- Histórico de análises realizadas na sessão
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Next.js](https://nextjs.org)
+- [React](https://react.dev)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Query](https://tanstack.com/query/latest)
+- [pdf2json](https://www.npmjs.com/package/pdf2json) (processar PDF's)
+- [Lucide Icons](https://lucide.dev/) (ícones)
+- Backend Python para análise do conteúdo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Como rodar o projeto
 
-## Learn More
+1. **Clone o repositório:**
+   ```bash
+   git clone <url-do-repositorio>
+   cd frontend
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   # ou
+   yarn
+   # ou
+   pnpm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Configure as variáveis de ambiente:**
+   - Crie um arquivo `.env.local` na raiz do projeto, se necessário, e configure as URLs do backend Python.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   # ou
+   pnpm dev
+   ```
 
-## Deploy on Vercel
+5. **Acesse a aplicação:**
+   Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Estrutura principal
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/components`: Componentes React reutilizáveis
+- `src/hooks`: Hooks customizados para integração com a API
+- `src/app`: Rotas e páginas da aplicação
+- `src/lib`: Funções utilitárias
+- `src/app/api`: Rotas API do Next.js (incluindo processamento de PDF)
+
+## Observações
+
+- Certifique-se de que o backend Python esteja rodando e acessível na URL configurada.
+- O processamento de arquivos PDF é feito em uma rota API do próprio Next.js usando `pdf2json`.
+- Para arquivos grandes, o limite de upload é de 5MB.
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+
+---
+
+Desenvolvido com Next.js e Vercel.
